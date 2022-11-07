@@ -1,5 +1,6 @@
 import Link from "next/link";
 import __supabase from "../lib/$supabase";
+import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -13,6 +14,32 @@ const SignupPage = () => {
     }
   };
 
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    const inputData = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
+
+    if (inputData.email == "" || inputData.password == "") {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    toast.loading("Signing up...");
+
+    const { error } = await __supabase.auth.signUp(inputData);
+
+    toast.dismiss();
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Successfully signed up.");
+      toast("Please check your email for a confirmation link.");
+      router.push("/login");
+    }
+  };
+
   useEffect(() => {
     checkUser();
   }, []);
@@ -22,7 +49,10 @@ const SignupPage = () => {
       <main className=" flex flex-col py-28">
         <h1 className="text-center text-4xl font-bold">Sign up an account</h1>
 
-        <form className="w-full max-w-lg mx-auto mt-10 gap-5">
+        <form
+          onSubmit={(e) => handleSignup(e)}
+          className="w-full max-w-lg mx-auto mt-10 gap-5"
+        >
           <div className="flex flex-col gap-2 ">
             <label htmlFor="email">Email</label>
             <input
