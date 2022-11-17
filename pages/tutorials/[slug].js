@@ -40,6 +40,9 @@ const ModulePage = () => {
           lessonTitle
           lessonTags
           lessonDifficulty
+					featuredImage {
+						url
+					}
         }
       }
     }
@@ -68,13 +71,12 @@ const ModulePage = () => {
 
 	const { moduleTitle, moduleDescription, lessons } = module.modules[0];
 
+	console.log(lessons);
+
 	return (
 		<>
 			<main className="py-28 pb-32">
-				<Link
-          href="/tutorials"
-					className="link"
-				>
+				<Link href="/tutorials" className="link">
 					Go back to modules
 				</Link>
 				<h1 className="text-3xl font-bold mt-10">{moduleTitle}</h1>
@@ -89,6 +91,16 @@ const ModulePage = () => {
 							>
 								<Link href={`/tutorials/lesson/${lesson.lessonSlug}`}>
 									<div className="p-4 bg-base-300">
+										<div className="mb-2 overflow-hidden w-full min-h-[200px] rounded-box">
+											<img
+												src={
+													lesson.featuredImage?.url ??
+													`https://picsum.photos/seed/${index}/400/200`
+												}
+												alt={lesson.lessonTitle}
+												className="object-cover w-full h-full"
+											/>
+										</div>
 										<h2 className="text-xl font-bold">
 											{index + 1}: {lesson.lessonTitle}
 										</h2>

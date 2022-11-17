@@ -1,4 +1,10 @@
-import { FiArrowLeft, FiArrowLeftCircle, FiArrowRightCircle, FiArrowUpCircle, FiLoader } from "react-icons/fi";
+import {
+	FiArrowLeft,
+	FiArrowLeftCircle,
+	FiArrowRightCircle,
+	FiArrowUpCircle,
+	FiLoader,
+} from "react-icons/fi";
 
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -32,6 +38,9 @@ const Lesson = () => {
         lessonDifficulty
         lessonTags
         lessonContent
+				featuredImage {
+					url
+				}
         createdAt
         module {
           moduleSlug
@@ -44,6 +53,9 @@ const Lesson = () => {
           lessonSlug
           lessonTitle
         }
+				videoLesson {
+					url
+				}
       }
     }
   `;
@@ -112,6 +124,33 @@ const Lesson = () => {
 						(lessonDifficulty === 5 && "Very Hard")}
 				</p>
 
+				{/* featured Image */}
+				{/* <div className="mt-10">
+					<img
+						src={
+							lessons.lessons[0].featuredImage?.url ??
+							`https://picsum.photos/seed/${id}/500/300`
+						}
+						className="w-full max-w-2xl object-cover rounded-xl"
+						alt={lessonTitle}
+					/>
+				</div> */}
+
+				{/* videos */}
+				{lessons.lessons[0].videoLesson && (
+					<div className="mt-10">
+						{lessons.lessons[0].videoLesson?.map((video, index) => (
+							<video
+								key={`video_${index + 1}`}
+								controls={true}
+								className="bg-base-300 rounded-lg max-w-2xl"
+							>
+								<source src={video.url} type="video/mp4" />
+							</video>
+						))}
+					</div>
+				)}
+
 				<ReactMarkdown
 					className="mt-10 pb-36 flex flex-col gap-5 w-full overflow-hidden"
 					components={{
@@ -147,11 +186,11 @@ const Lesson = () => {
             `}
 							className="flex items-center gap-5"
 						>
-              <FiArrowLeftCircle className="text-2xl" />
-              <p className="text-left flex flex-col">
+							<FiArrowLeftCircle className="text-2xl" />
+							<p className="text-left flex flex-col">
 								<span className="text-sm">Previous Lesson</span>
 								<span>{lessons.lessons[0].prevLesson.lessonTitle}</span>
-              </p>
+							</p>
 						</Link>
 					) : (
 						<div />
@@ -163,22 +202,24 @@ const Lesson = () => {
             `}
 							className="flex items-center gap-5"
 						>
-              <p className="text-right flex flex-col">
+							<p className="text-right flex flex-col">
 								<span className="text-sm">Next Lesson</span>
 								<span>{lessons.lessons[0].nextLesson.lessonTitle}</span>
-              </p>
-              <FiArrowRightCircle className="text-2xl" />
+							</p>
+							<FiArrowRightCircle className="text-2xl" />
 						</Link>
 					) : (
-						<Link href={`
+						<Link
+							href={`
               /tutorials/${lessons.lessons[0].module.moduleSlug}
-            `} 
-							className="flex items-center gap-5">
-              <p className="text-right flex flex-col">
-                <span >Go to Module Overview</span>
-              </p>
-              <FiArrowUpCircle className="text-2xl" />
-            </Link>
+            `}
+							className="flex items-center gap-5"
+						>
+							<p className="text-right flex flex-col">
+								<span>Go to Module Overview</span>
+							</p>
+							<FiArrowUpCircle className="text-2xl" />
+						</Link>
 					)}
 				</div>
 			</main>
