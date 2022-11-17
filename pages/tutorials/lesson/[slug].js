@@ -125,7 +125,7 @@ const Lesson = () => {
 				</p>
 
 				{/* featured Image */}
-				{/* <div className="mt-10">
+				<div className="mt-10">
 					<img
 						src={
 							lessons.lessons[0].featuredImage?.url ??
@@ -134,7 +134,7 @@ const Lesson = () => {
 						className="w-full max-w-2xl object-cover rounded-xl"
 						alt={lessonTitle}
 					/>
-				</div> */}
+				</div>
 
 				{/* videos */}
 				{lessons.lessons[0].videoLesson && (
