@@ -5,6 +5,7 @@ import {
 	FiArrowUpCircle,
 	FiLoader,
 } from "react-icons/fi";
+import { useEffect, useState } from "react";
 
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
@@ -12,7 +13,6 @@ import __supabase from "../../../lib/$supabase";
 import dayjs from "dayjs";
 import { useQuery } from "urql";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 const Lesson = () => {
 	const router = useRouter();
@@ -62,6 +62,10 @@ const Lesson = () => {
 	const [lessonResult, reexecuteLessonQuery] = useQuery({
 		query: lessonQuery,
 	});
+
+	useEffect(() => {
+		checkUser();
+	}, [])
 
 	
 	if (!hasUser) {
