@@ -55,6 +55,7 @@ const Navbar = (e) => {
                   onClick={async () => {
                     await __supabase.auth.signOut();
                     setHasUser(false);
+                    router.reload()
                   }}
                   className="btn btn-sm btn-ghost"
                 >

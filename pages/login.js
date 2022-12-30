@@ -12,12 +12,8 @@ const LoginPage = () => {
   const checkUser = async (e) => {
     const res = await __supabase.auth.getUser();
     if (res.data.user) {
-      console.log(res.data.user);
       setHasUser(true);
     }
-    setTimeout(() => {
-      router.push("/");
-    }, 5000);
   };
 
   useEffect(() => {
@@ -54,8 +50,9 @@ const LoginPage = () => {
       <>
         <main className="py-16 flex flex-col items-center pt-28">
           <h1 className="text-2xl text-center max-w-xl">You are signed in.</h1>
-
-          <p>Redirecting you to the homepage in 5 seconds...</p>
+          <Link className="btn btn-primary mt-4" href={"/"}>
+            Go to Home
+          </Link>
         </main>
       </>
     );

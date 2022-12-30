@@ -68,10 +68,25 @@ const ModulePage = () => {
 			</main>
 		);
 	}
+	
+	if (!hasUser) {
+		return (
+			<main className="py-28 pb-32">
+				<h1 className="text-2xl font-bold text-center mb-5">
+					You must be logged in to view this page.
+				</h1>
+
+				<div className="flex justify-center">
+					<Link href="/login" className="btn btn-primary">
+						Go to Login
+					</Link>
+				</div>
+			</main>
+		)
+	}
 
 	const { moduleTitle, moduleDescription, lessons } = module.modules[0];
 
-	console.log(lessons);
 
 	return (
 		<>
