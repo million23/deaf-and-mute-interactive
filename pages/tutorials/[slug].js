@@ -97,7 +97,7 @@ const ModulePage = () => {
 				<h1 className="text-3xl font-bold mt-10">{moduleTitle}</h1>
 				<p className="opacity-70 mb-10">{moduleDescription}</p>
 
-				<ul className="grid grid-cols-2 gap-4">
+				<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 					{hasUser &&
 						lessons.map((lesson, index) => (
 							<li
@@ -113,7 +113,7 @@ const ModulePage = () => {
 													`https://picsum.photos/seed/${index}/400/200`
 												}
 												alt={lesson.lessonTitle}
-												className="object-cover w-full h-full"
+												className="object-contain w-full h-full max-h-[200px]"
 											/>
 										</div>
 										<h2 className="text-xl font-bold">

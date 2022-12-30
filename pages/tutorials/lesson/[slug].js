@@ -151,7 +151,7 @@ const Lesson = () => {
 							lessons.lessons[0].featuredImage?.url ??
 							`https://picsum.photos/seed/${id}/500/300`
 						}
-						className="w-full max-w-2xl object-cover rounded-xl"
+						className="w-full max-h-[300px] object-contain rounded-xl"
 						alt={lessonTitle}
 					/>
 				</div>
